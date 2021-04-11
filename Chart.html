@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+	<title> Chart </title>
+	<meta charset="UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Roboto font -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+	<!-- font-awesome -->
+	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+	<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script type="text/javascript">
+  //Functions to store and retrieve objects from localstorage
+  function readLocalStorage(name){
+    return JSON.parse(localStorage.getItem(name));
+  };
+
+  //If our localstroage items are empty let's store the localobject
+  if(readLocalStorage('localincomedata') == null){
+    pincome = 0;
+  }
+  if(readLocalStorage('localexpdata') == null){
+    pexp = 0;
+  }
+  var readlocalincome = readLocalStorage('localincomedata');
+  var income = 0;var expenses = 0;
+  // read data from local storage if avaiable
+  for (var i in readlocalincome) {
+  	income = income +  readlocalincome[i].money;
+  }
+  var readlocalexp = readLocalStorage('localexpdata');
+  for (var i in readlocalexp) {
+  	expenses = expenses +  readlocalexp[i].money;
+  }
+	window.onload = function() {
+	var pin = 0;
+	var pex = 0;
+	if (income > expenses) {
+		pex = (expenses / income) * 100;
+		pin = 100 - pex;
+		pex = Math.round(pex);
+		pin = Math.round(pin);
+	}
+	else if (expenses > income) {
+		pex = (expenses / income) * 100;
+		pin = 100 - pex;
+		pex = Math.round(pex);
+		pin = Math.round(pin);
+	}
+	else{
+		pin = 100;
+		pex = 100;
+	}
+	
+	var chart = new CanvasJS.Chart("chartContainer", {
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	exportEnabled: true,
+	animationEnabled: true,
+	title: {
+		text: "Budget Calculator 2019"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 50,
+		toolTipContent: "<b>{label}</b>: {y}%",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} = {y}%",
+		dataPoints: [
+			{ y: pin, label: "IncomeRemaining" },
+			{ y: pex, label: "Expenses" }
+		]
+	}]
+});
+chart.render();
+}
+</script>
+</head>
+<body>
+
+<!-- navbar start -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="index.html"> <i class="fas fa-calculator"></i> </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" href="index.html"> Home </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="Chart.html"> Chart <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="Income.html"> Income </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="Expenses.html"> Expenses </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- navbar ends -->
+
+<h1></h1>
+<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+
+</body>
+</html>

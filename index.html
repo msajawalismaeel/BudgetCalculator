@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+  <meta charset="UTF-8">
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <script type="text/javascript" src="js/date.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/date.css" >
+  <link rel="stylesheet" type="text/css" href="css/button.css">
+  <script type="text/javascript" src="js/javascript.js"></script>
+</head>
+
+<body onload="setMonth()">
+
+<!-- navbar start -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="index.html"> <i class="fas fa-calculator"></i> </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="Chart.html"> Chart</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="Income.html"> Income </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="Expenses.html"> Expenses </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- navbar ends -->
+
+
+
+<div class="container_fluid">
+  <div class="jumbotron-fluid text-center">
+    <dir class="container_fluid">
+        <div class="top">
+            <div class="budget">
+                <div class="budget__title" >
+                    Available Budget in <span class="budget__title" id="budget_month"> Year </span>
+                </div>
+                <script type="text/javascript">
+                  
+
+                </script>
+                <div class="budget__value" id="totalbudget">+ 0</div>
+                <div class="budget__income clearfix">
+                    <div class="budget__income--text">Income</div>
+                    <div class="right">
+                        <div class="budget__income--value" id="incomevalue">+ 0</div>
+                        <div class="budget__income--percentage">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="budget__expenses clearfix">
+                    <div class="budget__expenses--text">Expenses</div>
+                    <div class="right clearfix">
+                        <div class="budget__expenses--value" id="expensesvalue">- 0</div>
+                        <div class="budget__income--percentage">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dir>
+  </div>
+<!-- top ends -->
+<h1></h1>
+    <div class="add">
+      <div class="container">
+        <div class="row text-center">
+           <div class="col-12 col-sm-4 input-group my-3">
+            <select class="col-4 col-sm-4 custom-select add__type type" id="type">
+              <option value="Type" selected>Type</option>
+              <option value="Income">Income</option>
+              <option value="Expenses">Expenses</option>
+            </select>
+            <input type="text" class="col-8 col-sm-8 form-control add__description" id="title" placeholder="Add Title">
+          </div>
+          <div class="col-12 col-sm-4 input-group my-3">
+            <select class="col-4 col-sm-4  custom-select add__type method" id="paymethod">
+              <option value="PayMethod" selected>PayMethod</option>
+              <option value="Cash"> Cash</option>
+              <option value="Debit Card">Debit Card</option>
+              <option value="Credit Card">Credit Card</option>
+            </select>
+            <input type="textbox" class="col-8 col-sm-8 form-control add__value allownumericwithoutdecimal" id="money" placeholder="Value">  
+          </div>
+          <div class="dates col-12 col-sm-2 input-group my-3">
+            <input class="form-control" id="usr1" name="event_date" placeholder="YYYY-MM-DD">
+          </div>
+         <div class="col-12 col-sm-1 my-3">
+            <button type="button" class="btn sbtn" id="addrecordbutton" onclick="addRecord();">Add Record</button>
+         </div>
+        </div>
+      </div>
+    </div>
+<h1></h1>
+
+      <!-- starts -->
+      <div class="container_fluid mx-3 item">
+        <div class="row">
+          <!-- income starts -->
+          <div class="col-12 col-sm-6">
+            <h2 class="income__title text-center">Income</h2>
+              <table class="table table-bordered table-striped">
+                <thead class="" style="color: white; background-color: #2ecc71;" >
+                  <tr>
+                    <th scope="col"> Title</th>
+                    <th scope="col"> Amount</th>
+                    <th scope="col"> Payment</th>
+                    <th scope="col"> Date</th>
+                  </tr>
+                </thead>
+                <tbody class="income_table_body">
+                </tbody>
+              </table>
+          </div>
+          <!-- income ends -->
+          <!-- expenses start -->
+          <div class="col-12 col-sm-6">
+            <h2 class="expenses__title text-center">Expenses</h2>
+            <table class="table table-bordered table-striped">
+                <thead class="" style="color: white; background-color: #E74E67;" >
+                  <tr>
+                    <th scope="col"> Title</th>
+                    <th scope="col"> Amount</th>
+                    <th scope="col"> Payment</th>
+                    <th scope="col"> Date</th>
+                  </tr>
+                </thead>
+                <tbody class="expenses_table_body">
+                  
+                </tbody>
+              </table>
+          </div>
+          <!-- expenses ends -->
+        </div>
+      </div>
+      <!-- ends -->
+</div>
+
+
+
+  <script type="text/javascript">
+    // for handling numbers onyl
+    $(".allownumericwithoutdecimal").on("keypress keyup blur",function (event) {    
+             $(this).val($(this).val().replace(/[^\d].+/, ""));
+              if ((event.which < 48 || event.which > 57)) {
+                  event.preventDefault();
+              }
+          });
+  </script>
+
+
+
+</body>
+</html>
