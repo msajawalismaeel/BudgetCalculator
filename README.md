@@ -1,3 +1,5 @@
 # BudgetCalculator
-Budget Calculator Web App.
-This App is built with HTML, CSS, and Javascript will help you to calculate your Daily, Monthly, Weekly Budget.
+Budget Calculator Web App will help you to track your expenses.
+Add your income and expenses to calcuate the remaining budget.
+
+![](images/BudgetCalculator.PNG)
